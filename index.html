@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Mes films vus en 2026 ✨</title>
+  <title>Expos et pièces de théâtre vues en 2026 ✨</title>
   <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" href="favicon.png" sizes="192x192" />
 <link rel="icon" type="image/png" href="favicon.png" sizes="32x32" />
@@ -23,13 +23,13 @@
   max-width: 100%;
   font-family: 'Lora', serif;
 }
-    .films-container {
+    .sorties-container {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
       gap: 15px;
       padding: 10px;
     }
-    .film {
+    .sortie {
       border: 1px solid #ddd;
       border-radius: 12px;
       overflow: hidden;
@@ -37,20 +37,20 @@
       background: white;
       transition: transform 0.2s;
     }
-    .film:hover {
+    .sortie:hover {
       transform: translateY(-2px);
     }
-    .film img {
+    .sortie img {
       width: 100%;
       height: 225px;
       object-fit: cover;
       border-bottom: 1px solid #eee;
     }
-    .film-info {
+    .sortie-info {
       padding: 10px;
       text-align: center;
     }
-    .film-title {
+    .sortie-title {
       font-weight: bold;
       font-size: 1.2em;
       margin: 0 0 5px 0;
@@ -58,22 +58,22 @@
       overflow: hidden;
       text-overflow: ellipsis;
     }
-    .film-place {
+    .sortie-place {
       font-size: 0.9em;
       color: #666;
        margin: 5px 0;
     }
-    .film-date {
+    .sortie-date {
       color: #666;
       font-size: 0.8em;
       margin: 5px 0;
     }
-    .film-note {
+    .sortie-note {
       font-weight: bold;
       color: #333;
       margin: 5px 0;
     }
-    .add-film {
+    .add-sortie {
   margin-top: 20px;
   padding: 15px;
   background: #f9f9f9;
@@ -82,9 +82,9 @@
   box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
-.add-film input,
-.add-film select,
-.add-film button {
+.add-sortie input,
+.add-sortie select,
+.add-sortie button {
   border-radius: 12px; /* 👈 plus arrondi */
   padding: 8px 12px; /* 👈 un peu plus compact */
   margin: 8px 0;
@@ -94,13 +94,13 @@
   transition: border 0.2s;
 }
 
-.add-film input:focus,
-.add-film select:focus {
+.add-sortie input:focus,
+.add-sortie select:focus {
   border-color: #007BFF;
   outline: none;
 }
 
-.add-film button {
+.add-sortie button {
   background: #007BFF;
   color: white;
   border: none;
@@ -113,23 +113,23 @@
   width: auto; /* 👈 s’adapte à la taille du texte */
 }
 
-.add-film button:hover {
+.add-sortie button:hover {
   background: #0056b3;
 }
     @media (max-width: 600px) {
-      .films-container {
+      .sorties-container {
         grid-template-columns: repeat(2, 1fr);
       }
     }
   </style>
 </head>
 <body>
-  <h1 style="text-align: center; margin-bottom: 10px;">🎬 Mes films vus en 2026 ✨</h1>
-  <div class="films-container" id="films-list"></div>
+  <h1 style="text-align: center; margin-bottom: 10px;">Expos et pièces de théâtre vues en 2026 ✨</h1>
+  <div class="sorties-container" id="sorties-list"></div>
 
-  <div class="add-film">
-    <h3>Ajouter un film</h3>
-    <input type="text" id="title" placeholder="Titre du film" />
+  <div class="add-sortie">
+    <h3>Ajouter une sortie</h3>
+    <input type="text" id="title" placeholder="Nom de l'expo ou de la pièce" />
     <input type="url" id="poster" placeholder="URL du poster (ex. : https://...jpg)" />
     <input type="text" id="place" placeholder="Lieu" />
     <input type="date" id="date" />
@@ -140,34 +140,34 @@
       <option value="4">4 ⭐</option>
       <option value="5">5 ⭐</option>
     </select>
-    <button onclick="addFilm()" style="background: #c191db; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-weight: bold;">
+    <button onclick="addsortie()" style="background: #c191db; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-weight: bold;">
   Ajouter
 </button>
   </div>
 
   <script>
-    let films = JSON.parse(localStorage.getItem('films')) || [];
+    let sorties = JSON.parse(localStorage.getItem('sorties')) || [];
 
-    function renderFilms() {
-  const list = document.getElementById('films-list');
+    function rendersorties() {
+  const list = document.getElementById('sorties-list');
   list.innerHTML = '';
-  films.forEach((film, index) => {
+  sorties.forEach((sortie, index) => {
     const div = document.createElement('div');
-    div.className = 'film';
+    div.className = 'sortie';
     div.innerHTML = `
-      <img src="${film.poster}" alt="${film.title}" onerror="this.src='https://via.placeholder.com/150x225?text=No+Poster'">
-      <div class="film-info">
-        <div class="film-title">${film.title}</div>
-        <div class="film-place">${film.place}</div>
-        <div class="film-date">Vu le ${new Date(film.date).toLocaleDateString()}</div>
-        <div class="film-note">Note : ${film.note} ⭐</div>
-        <button onclick="deleteFilm(${index})" style="margin-top: 5px; padding: 0; font-size: 1em; background: none; border: none; color: #666; cursor: pointer; font-family: inherit;">🗑️</button>      </div>
+      <img src="${sortie.poster}" alt="${sortie.title}" onerror="this.src='https://via.placeholder.com/150x225?text=No+Poster'">
+      <div class="sortie-info">
+        <div class="sortie-title">${sortie.title}</div>
+        <div class="sortie-place">${sortie.place}</div>
+        <div class="sortie-date">Vu le ${new Date(sortie.date).toLocaleDateString()}</div>
+        <div class="sortie-note">Note : ${sortie.note} ⭐</div>
+        <button onclick="deletesortie(${index})" style="margin-top: 5px; padding: 0; font-size: 1em; background: none; border: none; color: #666; cursor: pointer; font-family: inherit;">🗑️</button>      </div>
     `;
     list.appendChild(div);
   });
 }
 
-    function addFilm() {
+    function addsortie() {
       const title = document.getElementById('title').value.trim();
       const poster = document.getElementById('poster').value.trim();
       const place = document.getElementById ('place').value.trim();
@@ -179,22 +179,22 @@
         return;
       }
 
-      films.push({ title, poster, place, date, note });
-      localStorage.setItem('films', JSON.stringify(films));
+      sorties.push({ title, poster, place, date, note });
+      localStorage.setItem('sorties', JSON.stringify(sorties));
       document.getElementById('title').value = '';
       document.getElementById('poster').value = '';
       document.getElementById ('place').value = '';
       document.getElementById('date').value = '';
-      renderFilms();
+      rendersorties();
     }
 
-    renderFilms();
+    rendersorties();
     
-    function deleteFilm(index) {
-  if (confirm('Supprimer ce film ?')) {
-    films.splice(index, 1); // Supprime le film à l'index donné
-    localStorage.setItem('films', JSON.stringify(films)); // Sauvegarde
-    renderFilms(); // Rafraîchit l'affichage
+    function deletesortie(index) {
+  if (confirm('Supprimer ce sortie ?')) {
+    sorties.splice(index, 1); // Supprime le sortie à l'index donné
+    localStorage.setItem('sorties', JSON.stringify(sorties)); // Sauvegarde
+    rendersorties(); // Rafraîchit l'affichage
   }
 }
   </script>
