@@ -1,18 +1,18 @@
 {
-  "name": "Films vus en 2026 ✨",
-  "short_name": "Mes films",
+  "name": "Sorties expos et théâtre de 2026 ✨",
+  "short_name": "Mes sorties 2026 ✨",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#f8f8f8",
   "theme_color": "#000000",
   "icons": [
     {
-      "src": "icon-192.png",
+      "src": "icon-192bis.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "icon-512.png",
+      "src": "icon-512bis.png",
       "type": "image/png",
       "sizes": "512x512"
     }
