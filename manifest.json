@@ -1,7 +1,7 @@
 {
   "name": "Sorties expos et théâtre de 2026",
   "short_name": "Mes sorties 2026 ✨",
-  "start_url": "/",
+  "start_url": "/culture/",
   "display": "standalone",
   "background_color": "#f8f8f8",
   "theme_color": "#000000",
